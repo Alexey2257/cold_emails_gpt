@@ -1,9 +1,10 @@
+<%# app/views/cold_emails/_form.html.erb %>
 <%= form_with(model: form,
               url: cold_emails_path,
               class: "contents",
               data: {
                 controller: "form",
-                turbo_frame: "email-preview",
+                turbo_frame: "_top",
                 action: "turbo:submit-start->form#onSubmitStart turbo:submit-end->form#onSubmitEnd"
               }) do |f| %>
 

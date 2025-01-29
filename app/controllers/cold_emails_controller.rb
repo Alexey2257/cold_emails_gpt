@@ -44,7 +44,13 @@ class ColdEmailsController < ApplicationController
   end
 
   def update
-    # Todo, regeneration
+    respond_to do |format|
+      if @cold_email.update(update_params)
+        format.html { redirect_to @cold_email, notice: 'Cold email was successfully updated.' }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
@@ -70,6 +76,13 @@ class ColdEmailsController < ApplicationController
       :language,
       :style,
       :length
+    )
+  end
+
+  def update_params
+    params.require(:cold_email).permit(
+      :subject,
+      :body
     )
   end
 end
