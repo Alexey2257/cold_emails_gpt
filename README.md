@@ -2,8 +2,12 @@
 
 For local test I will provide master key in email.
 
+place provided master.key in `config/master.key` folder.
+
 `bin/setup` should be enough to setup the project.
 `bin/dev` to start the app. Please have default redis running on localhost:6379 for sidekiq and actioncable.
+
+visit http://localhost:3000 and enjoy!
 
 ## Some notes:
 - tried to do separate commits in case one might follow process
