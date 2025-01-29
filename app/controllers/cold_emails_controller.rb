@@ -21,8 +21,8 @@ class ColdEmailsController < ApplicationController
     if @form.save
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update("email-preview",
-                                                   partial: "cold_emails/cold_email",
+          render turbo_stream: turbo_stream.update('email-preview',
+                                                   partial: 'cold_emails/cold_email',
                                                    locals: { cold_email: @form.cold_email })
         end
         format.html { redirect_to @form.cold_email }

@@ -5,7 +5,7 @@ class ColdEmailForm
   include ActiveModel::Attributes
 
   LANGUAGES = %w[english spanish french].freeze
-  STYLES = %w[professional friendly formal].freeze
+  STYLES = %w[sales friendly formal].freeze
   LENGTHS = %w[short medium long].freeze
 
   attribute :purpose, :string
@@ -47,9 +47,7 @@ class ColdEmailForm
     false
   end
 
-  def cold_email
-    @cold_email
-  end
+  attr_reader :cold_email
 
   private
 
