@@ -32,18 +32,33 @@ class ColdEmailForm
   def save
     return false unless valid?
 
-    ActiveRecord::Base.transaction do
-      result = generate_email
-      return false unless result
+    success = false
 
-      @cold_email.subject = result[:subject]
-      @cold_email.body = result[:body]
+    ActiveRecord::Base.transaction do
+      @cold_email.status = 'pending'
       @cold_email.save!
+      success = true
+    end
+
+    if success
+      # Move perform_async outside the transaction
+      ColdEmailGenerationJob.perform_async(
+        @cold_email.id,
+        attributes.slice(
+          'purpose',
+          'recipient',
+          'sender',
+          'prompt',
+          'language',
+          'style',
+          'length'
+        )
+      )
     end
 
     true
   rescue StandardError => e
-    errors.add(:base, "Failed to generate email: #{e.message}")
+    errors.add(:base, "Failed to queue email generation: #{e.message}")
     false
   end
 

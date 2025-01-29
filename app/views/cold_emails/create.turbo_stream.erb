@@ -1,3 +1,4 @@
-<%= turbo_stream.update 'email-preview',
-                        partial: 'cold_emails/cold_email',
-                        locals: { cold_email: @form.cold_email } %>
+<%# app/views/cold_emails/create.turbo_stream.erb %>
+<%= turbo_stream.update "email-preview" do %>
+  <%= render  partial: "loading_state", locals: { cold_email_id: @form.cold_email.id } %>
+<% end %>

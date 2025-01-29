@@ -1,3 +1,8 @@
+<%# app/views/cold_emails/_loading_state.html.erb %>
+<% if local_assigns[:cold_email_id] %>
+  <%= turbo_stream_from "cold_email_#{cold_email_id}" %>
+<% end %>
+
 <div class="flex flex-col items-center justify-center h-full p-8 text-center bg-gray-50 rounded-lg">
   <svg class="animate-spin w-12 h-12 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

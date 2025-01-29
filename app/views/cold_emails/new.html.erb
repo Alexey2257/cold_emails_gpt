@@ -11,8 +11,15 @@
       <%= render "form", form: @form %>
     </div>
 
-    <%= turbo_frame_tag "email-preview", class: "w-1/2 my-5" do %>
-      <%= render "empty_state" %>
-    <% end %>
+    <div class="w-1/2">
+      <%= turbo_frame_tag "email-preview", class: "block" do %>
+        <% if @form&.cold_email&.persisted? %>
+          <%= turbo_stream_from "cold_email_#{@form.cold_email.id}" %>
+          <%= render "loading_state", cold_email_id: @form.cold_email.id %>
+        <% else %>
+          <%= render "empty_state" %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

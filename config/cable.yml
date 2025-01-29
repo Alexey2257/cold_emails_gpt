@@ -3,7 +3,8 @@
 # not a terminal started via bin/rails console! Add "console" to any action or any ERB template view
 # to make the web console appear.
 development:
-  adapter: async
+  adapter: redis
+  channel_prefix: cold_mailer_development
 
 test:
   adapter: test

@@ -73,7 +73,7 @@ class ColdEmailGenerator
   def normalize_style(style)
     {
       'sales' => 'sales: enthusiastic and persuasive tone that emphasizes value and benefits',
-      'friendly' => 'friendly:warm and conversational while maintaining professionalism',
+      'friendly' => 'friendly: warm and conversational while maintaining professionalism',
       'formal' => 'formal: structured and traditional communication with proper etiquette'
     }[style]
   end
