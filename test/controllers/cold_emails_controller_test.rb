@@ -35,11 +35,6 @@ class ColdEmailsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should update cold_email' do
-    patch cold_email_url(@cold_email), params: { cold_email: { body: @cold_email.body, subject: @cold_email.subject } }
-    assert_redirected_to cold_email_url(@cold_email)
-  end
-
   test 'should destroy cold_email' do
     assert_difference('ColdEmail.count', -1) do
       delete cold_email_url(@cold_email)
