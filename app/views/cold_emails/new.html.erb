@@ -1,7 +1,8 @@
 <% content_for :title, "New cold email" %>
 
 <div class="space-y-6 w-full">
-  <div>
+  <div class="flex gap-8">
+    <%= link_to "< Back to all emails", cold_emails_path, class: "p-2 rounded-md bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
     <h1 class="font-bold text-4xl">New cold email</h1>
   </div>
 
