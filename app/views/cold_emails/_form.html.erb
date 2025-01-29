@@ -1,9 +1,9 @@
-<%= form_with(model: cold_email, class: "contents") do |form| %>
-  <% if cold_email.errors.any? %>
+<%= form_with(model: @form, url: cold_emails_path, class: "contents") do |form| %>
+  <% if @form.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(cold_email.errors.count, "error") %> prohibited this cold_email from being saved:</h2>
+      <h2><%= pluralize(@form.errors.count, "error") %> prohibited this cold email from being generated:</h2>
       <ul class="list-disc ml-6">
-        <% cold_email.errors.each do |error| %>
+        <% @form.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -34,7 +34,7 @@
     <div class="my-5">
       <%= form.label :language %>
       <%= form.select :language,
-                      options_for_select([['English', 'english'], ['Spanish', 'spanish'], ['French', 'french']], 'english'),
+                      options_for_select(ColdEmailForm::LANGUAGES.map { |l| [l.titleize, l] }, @form.language),
                       {},
                       class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
     </div>
@@ -42,7 +42,7 @@
     <div class="my-5">
       <%= form.label :style %>
       <%= form.select :style,
-                      options_for_select([['Professional', 'professional'], ['Friendly', 'friendly'], ['Formal', 'formal']], 'professional'),
+                      options_for_select(ColdEmailForm::STYLES.map { |s| [s.titleize, s] }, @form.style),
                       {},
                       class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
     </div>
@@ -50,7 +50,7 @@
     <div class="my-5">
       <%= form.label :length %>
       <%= form.select :length,
-                      options_for_select([['Short', 'short'], ['Medium', 'medium'], ['Long', 'long']], 'medium'),
+                      options_for_select(ColdEmailForm::LENGTHS.map { |l| [l.titleize, l] }, @form.length),
                       {},
                       class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
     </div>

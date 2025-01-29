@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Steps of project:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [x] Create basic app
+- [x] Create ColdEmail and basic generator
+- [x] Refactor controller to use form
+- [] Add response on same page
+- [] Add regeneration
+- [] Add sidebar with links to other email
+- [] Use streaming
