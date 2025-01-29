@@ -1,0 +1,62 @@
+<%= form_with(model: cold_email, class: "contents") do |form| %>
+  <% if cold_email.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(cold_email.errors.count, "error") %> prohibited this cold_email from being saved:</h2>
+      <ul class="list-disc ml-6">
+        <% cold_email.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :purpose, "Email Purpose" %>
+    <%= form.text_field :purpose, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :recipient, "Recipient Information" %>
+    <%= form.text_field :recipient, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :sender, "Sender Information" %>
+    <%= form.text_field :sender, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :prompt, "Additional Instructions" %>
+    <%= form.text_area :prompt, rows: 3, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+  </div>
+
+  <div class="grid grid-cols-3 gap-4">
+    <div class="my-5">
+      <%= form.label :language %>
+      <%= form.select :language,
+                      options_for_select([['English', 'english'], ['Spanish', 'spanish'], ['French', 'french']], 'english'),
+                      {},
+                      class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :style %>
+      <%= form.select :style,
+                      options_for_select([['Professional', 'professional'], ['Friendly', 'friendly'], ['Formal', 'formal']], 'professional'),
+                      {},
+                      class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :length %>
+      <%= form.select :length,
+                      options_for_select([['Short', 'short'], ['Medium', 'medium'], ['Long', 'long']], 'medium'),
+                      {},
+                      class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+    </div>
+  </div>
+
+  <div class="inline">
+    <%= form.submit "Generate Email", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
