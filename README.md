@@ -24,5 +24,7 @@ For local test I will provide master key in email.
 - [] store generation params for future purposes (maybe we want to regenerate for example)
 - [] Add sidebar with links to other email for nicer navigation
 - [] Use response streaming for email generation
-- [] Falcon will be a good choice for such app (if generation will be in background jobs)
+- [] Check and add some error handling for streaming job result
+- [] Add some beautiful styles!
+- [] Falcon will be a good choice for such app
 - [] Add tests
