@@ -10,7 +10,7 @@
     <%= link_to "New cold email", new_cold_email_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <div id="cold_emails" class="min-w-full">
+  <div id="cold_emails" class="min-w-full space-y-6 my-6">
     <% if @cold_emails.any? %>
       <% @cold_emails.each do |cold_email| %>
         <%= render cold_email %>

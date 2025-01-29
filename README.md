@@ -1,5 +1,7 @@
 # README
 
+For local test I will provide master key in email
+
 ## Some notes:
 - used scaffold for fast prototyping
 - nice that Rails 8 has Github actions integration out of box!
@@ -18,3 +20,4 @@
 - [] Use response streaming
 - [] Use background job for email generation
 - [] Falcon will be a good choice for such app
+- [] Add tests
