@@ -17,10 +17,11 @@ For local test I will provide master key in email.
 - [x] Refactor controller to use form
 - [x] Add response on same page with turbo
 - [x] Add loader for generating
-- [] Add regeneration (edit) of existing email, store generation params for this purpose
+
 
 ## Todos:
-- [] Add sidebar with links to other email
+- [] store generation params for future purposes (maybe we want to regenerate for example)
+- [] Add sidebar with links to other email for nicer navigation
 - [] Use response streaming
 - [] Use background job for email generation
 - [] Falcon will be a good choice for such app (if generation will be in background jobs)

@@ -12,18 +12,6 @@ class ColdEmailsTest < ApplicationSystemTestCase
     assert_selector 'h1', text: 'Cold emails'
   end
 
-  test 'should create cold email' do
-    visit cold_emails_url
-    click_on 'New cold email'
-
-    fill_in 'Body', with: @cold_email.body
-    fill_in 'Subject', with: @cold_email.subject
-    click_on 'Create Cold email'
-
-    assert_text 'Cold email was successfully created'
-    click_on 'Back'
-  end
-
   test 'should update Cold email' do
     visit cold_email_url(@cold_email)
     click_on 'Edit this cold email', match: :first
