@@ -18,26 +18,12 @@ class ColdEmailsController < ApplicationController
   def create
     @form = ::ColdEmailForm.new(cold_email_form_params)
 
-    if @form.save
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.update('email-preview',
-                                                   partial: 'cold_emails/cold_email',
-                                                   locals: { cold_email: @form.cold_email })
-        end
+    respond_to do |format|
+      if @form.save
+        format.turbo_stream { render 'create' }
         format.html { redirect_to @form.cold_email }
-      end
-    else
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.update('cold-email-form',
-                                partial: 'form',
-                                locals: { form: @form }),
-            turbo_stream.update('email-preview',
-                                partial: 'empty_state')
-          ]
-        end
+      else
+        format.turbo_stream { render 'create_error' }
         format.html { render :new, status: :unprocessable_entity }
       end
     end

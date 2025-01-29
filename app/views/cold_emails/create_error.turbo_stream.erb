@@ -1,0 +1,6 @@
+<%= turbo_stream.update 'cold-email-form',
+                        partial: 'form',
+                        locals: { form: @form } %>
+
+<%= turbo_stream.update 'email-preview',
+                        partial: 'empty_state' %>
