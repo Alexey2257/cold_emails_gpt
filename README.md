@@ -1,8 +1,11 @@
 # README
 
-For local test I will provide master key in email
+For local test I will provide master key in email.
+
+`bin/setup` should be enough to setup the project.
 
 ## Some notes:
+- tried to do separate commits in case one might follow process
 - used scaffold for fast prototyping
 - nice that Rails 8 has Github actions integration out of box!
 - usually use rspec but since rails scaffold uses minitest, I used it
@@ -10,13 +13,13 @@ For local test I will provide master key in email
 ## Steps of project:
 
 - [x] Create basic app
-- [x] Create ColdEmail and basic generator
+- [x] Create ColdEmail and gpt generator
 - [x] Refactor controller to use form
 - [x] Add response on same page with turbo
 - [x] Add loader for generating
+- [] Add regeneration (edit) of existing email, store generation params for this purpose
 
 ## Todos:
-- [] Add regeneration of existing email, store generation params for this purpose
 - [] Add sidebar with links to other email
 - [] Use response streaming
 - [] Use background job for email generation
