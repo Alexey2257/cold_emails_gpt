@@ -28,7 +28,18 @@ class ColdEmailsController < ApplicationController
         format.html { redirect_to @form.cold_email }
       end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('cold-email-form',
+                                partial: 'form',
+                                locals: { form: @form }),
+            turbo_stream.update('email-preview',
+                                partial: 'empty_state')
+          ]
+        end
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
