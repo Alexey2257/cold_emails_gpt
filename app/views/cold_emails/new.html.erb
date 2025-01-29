@@ -1,9 +1,12 @@
 <% content_for :title, "New cold email" %>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New cold email</h1>
+<div class="flex w-full gap-8">
+  <div class="w-1/2">
+    <h1 class="font-bold text-4xl mb-6">New cold email</h1>
+    <%= render "form", form: @form %>
+  </div>
 
-  <%= render "form", cold_email: @cold_email %>
-
-  <%= link_to "Back to cold emails", cold_emails_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= turbo_frame_tag "email-preview", class: "w-1/2" do %>
+    <%= render "empty_state" %>
+  <% end %>
 </div>

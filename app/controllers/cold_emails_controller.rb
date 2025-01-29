@@ -19,7 +19,14 @@ class ColdEmailsController < ApplicationController
     @form = ::ColdEmailForm.new(cold_email_form_params)
 
     if @form.save
-      redirect_to @form.cold_email, notice: 'Cold email was successfully generated and saved.'
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("email-preview",
+                                                   partial: "cold_emails/cold_email",
+                                                   locals: { cold_email: @form.cold_email })
+        end
+        format.html { redirect_to @form.cold_email }
+      end
     else
       render :new, status: :unprocessable_entity
     end

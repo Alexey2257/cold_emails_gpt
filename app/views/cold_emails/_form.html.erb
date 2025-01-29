@@ -1,9 +1,17 @@
-<%= form_with(model: @form, url: cold_emails_path, class: "contents") do |form| %>
-  <% if @form.errors.any? %>
+<%= form_with(model: form,
+              url: cold_emails_path,
+              class: "contents",
+              data: {
+                controller: "form",
+                turbo_frame: "email-preview",
+                action: "turbo:submit-start->form#onSubmitStart turbo:submit-end->form#onSubmitEnd"
+              }) do |f| %>
+
+  <% if form.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(@form.errors.count, "error") %> prohibited this cold email from being generated:</h2>
+      <h2><%= pluralize(form.errors.count, "error") %> prohibited this cold email from being generated:</h2>
       <ul class="list-disc ml-6">
-        <% @form.errors.each do |error| %>
+        <% form.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -11,52 +19,108 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :purpose, "Email Purpose" %>
-    <%= form.text_field :purpose, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+    <%= f.label :purpose, class: "block font-medium text-gray-700 mb-1" do %>
+      Email Purpose
+      <span class="text-red-500">*</span>
+    <% end %>
+    <%= f.text_area :purpose,
+                    rows: 3,
+                    placeholder: "e.g., Introduce our new product to potential customers",
+                    class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full
+                focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+    <p class="mt-1 text-sm text-gray-500">
+      Clearly describe the main goal of your cold email
+    </p>
   </div>
 
   <div class="my-5">
-    <%= form.label :recipient, "Recipient Information" %>
-    <%= form.text_field :recipient, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+    <%= f.label :recipient, class: "block font-medium text-gray-700 mb-1" do %>
+      Recipient Information
+      <span class="text-red-500">*</span>
+    <% end %>
+    <%= f.text_area :recipient,
+                    rows: 3,
+                    placeholder: "e.g., Marketing Director at Tech Corp, interested in AI solutions",
+                    class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full
+                focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+    <p class="mt-1 text-sm text-gray-500">
+      Include recipient's role, company, and any relevant details
+    </p>
   </div>
 
   <div class="my-5">
-    <%= form.label :sender, "Sender Information" %>
-    <%= form.text_field :sender, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+    <%= f.label :sender, class: "block font-medium text-gray-700 mb-1" do %>
+      Sender Information
+      <span class="text-red-500">*</span>
+    <% end %>
+    <%= f.text_area :sender,
+                    rows: 3,
+                    placeholder: "e.g., Sales Manager at AI Solutions Inc., specialized in enterprise software",
+                    class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full
+                focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+    <p class="mt-1 text-sm text-gray-500">
+      Describe your role and relevant expertise
+    </p>
   </div>
 
   <div class="my-5">
-    <%= form.label :prompt, "Additional Instructions" %>
-    <%= form.text_area :prompt, rows: 3, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+    <%= f.label :prompt, class: "block font-medium text-gray-700 mb-1" do %>
+      Additional Instructions
+    <% end %>
+    <%= f.text_area :prompt,
+                    rows: 3,
+                    placeholder: "e.g., Include specific metrics, focus on ROI, mention mutual connection",
+                    class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full
+                focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+    <p class="mt-1 text-sm text-gray-500">
+      Any specific points or style preferences you'd like to include
+    </p>
   </div>
 
-  <div class="grid grid-cols-3 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <div class="my-5">
-      <%= form.label :language %>
-      <%= form.select :language,
-                      options_for_select(ColdEmailForm::LANGUAGES.map { |l| [l.titleize, l] }, @form.language),
-                      {},
-                      class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+      <%= f.label :language, class: "block font-medium text-gray-700 mb-1" %>
+      <%= f.select :language,
+                   options_for_select(ColdEmailForm::LANGUAGES.map { |l| [l.titleize, l] }, form.language),
+                   {},
+                   class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full
+                  focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
     </div>
 
     <div class="my-5">
-      <%= form.label :style %>
-      <%= form.select :style,
-                      options_for_select(ColdEmailForm::STYLES.map { |s| [s.titleize, s] }, @form.style),
-                      {},
-                      class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+      <%= f.label :style, class: "block font-medium text-gray-700 mb-1" %>
+      <%= f.select :style,
+                   options_for_select(ColdEmailForm::STYLES.map { |s| [s.titleize, s] }, form.style),
+                   {},
+                   class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full
+                  focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
     </div>
 
     <div class="my-5">
-      <%= form.label :length %>
-      <%= form.select :length,
-                      options_for_select(ColdEmailForm::LENGTHS.map { |l| [l.titleize, l] }, @form.length),
-                      {},
-                      class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:outline-blue-600" %>
+      <%= f.label :length, class: "block font-medium text-gray-700 mb-1" %>
+      <%= f.select :length,
+                   options_for_select(ColdEmailForm::LENGTHS.map { |l| [l.titleize, l] }, form.length),
+                   {},
+                   class: "block shadow rounded-md border border-gray-300 outline-none px-3 py-2 mt-1 w-full
+                  focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
     </div>
   </div>
 
-  <div class="inline">
-    <%= form.submit "Generate Email", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <div class="mt-8" data-form-target="submitWrapper">
+    <%= f.button type: "submit",
+                 class: "w-full md:w-auto rounded-md px-6 py-3 bg-blue-600 hover:bg-blue-500
+                text-white font-medium cursor-pointer transition-colors duration-200 
+                flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed",
+                 data: { form_target: "submit" } do %>
+      <span>Generate Email</span>
+      <svg class="hidden animate-spin h-5 w-5"
+           data-form-target="spinner"
+           xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    <% end %>
   </div>
 <% end %>
