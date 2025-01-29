@@ -5,7 +5,7 @@
 - [x] Create basic app
 - [x] Create ColdEmail and basic generator
 - [x] Refactor controller to use form
-- [] Add response on same page
-- [] Add regeneration
+- [x] Add response on same page with turbo
+- [] Add regeneration of existing email
 - [] Add sidebar with links to other email
 - [] Use streaming

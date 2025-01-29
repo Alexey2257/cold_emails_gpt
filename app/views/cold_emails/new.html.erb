@@ -1,12 +1,17 @@
 <% content_for :title, "New cold email" %>
 
-<div class="flex w-full gap-8">
-  <div class="w-1/2">
-    <h1 class="font-bold text-4xl mb-6">New cold email</h1>
-    <%= render "form", form: @form %>
+<div class="space-y-6 w-full">
+  <div>
+    <h1 class="font-bold text-4xl">New cold email</h1>
   </div>
 
-  <%= turbo_frame_tag "email-preview", class: "w-1/2" do %>
-    <%= render "empty_state" %>
-  <% end %>
+  <div class="flex  gap-8">
+    <div class="w-1/2">
+      <%= render "form", form: @form %>
+    </div>
+
+    <%= turbo_frame_tag "email-preview", class: "w-1/2" do %>
+      <%= render "empty_state" %>
+    <% end %>
+  </div>
 </div>
